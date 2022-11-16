@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.untitled">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.hci.eyerizer">
    <application
-        android:label="untitled"
+        android:label="Eyerizer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
