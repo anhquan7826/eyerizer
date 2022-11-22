@@ -4,22 +4,22 @@ abstract class CameraColorPickerState extends Equatable {
   const CameraColorPickerState();
 }
 
-class Initializing extends CameraColorPickerState {
-  const Initializing();
+class CamInitializing extends CameraColorPickerState {
+  const CamInitializing();
 
   @override
   List<Object?> get props => [];
 }
 
-class Initialized extends CameraColorPickerState {
-  const Initialized();
+class CamInitialized extends CameraColorPickerState {
+  const CamInitialized();
 
   @override
   List<Object?> get props => [];
 }
 
-class Error extends CameraColorPickerState {
-  const Error();
+class CamError extends CameraColorPickerState {
+  const CamError();
 
   @override
   List<Object?> get props => [];

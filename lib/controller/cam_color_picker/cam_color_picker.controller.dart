@@ -4,7 +4,7 @@ import 'package:eyerizer/helper/log_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CameraColorPickerController extends Cubit<CameraColorPickerState> {
-  CameraColorPickerController() : super(const Initializing()) {
+  CameraColorPickerController() : super(const CamInitializing()) {
     initialize();
   }
   
@@ -13,10 +13,10 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
       final cameras = await availableCameras();
       camController = CameraController(cameras.first, ResolutionPreset.max, enableAudio: false);
       await camController.initialize();
-      emit(const Initialized());
+      emit(const CamInitialized());
     } on CameraException catch (e) {
       LogHelper.log(e);
-      emit(const Error());
+      emit(const CamError());
     }
   }
 

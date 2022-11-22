@@ -37,14 +37,14 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
       body: BlocBuilder(
         bloc: controller,
         builder: (BuildContext context, state) {
-          if (state is Initialized) {
+          if (state is CamInitialized) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CameraPreview(controller.camController),
             );
           } else {
             return Center(
-              child: Text(state is Error ? 'Error!' : 'Initializing...'),
+              child: Text(state is CamError ? 'Error!' : 'Initializing...'),
             );
           }
         },
