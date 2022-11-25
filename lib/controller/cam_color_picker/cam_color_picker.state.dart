@@ -24,3 +24,26 @@ class CamError extends CameraColorPickerState {
   @override
   List<Object?> get props => [];
 }
+
+class CapturingColorStarted extends CameraColorPickerState {
+  const CapturingColorStarted();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class CapturingColorFinished extends CameraColorPickerState {
+  const CapturingColorFinished(this.color);
+
+  final int color;
+
+  @override
+  List<Object?> get props => [color];
+}
+
+class CapturingColorError extends CameraColorPickerState {
+  const CapturingColorError();
+
+  @override
+  List<Object?> get props => [];
+}
