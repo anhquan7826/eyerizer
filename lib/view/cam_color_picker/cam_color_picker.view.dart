@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.controller.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.state.dart';
-import 'package:eyerizer/model/color_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,8 +21,6 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
     super.dispose();
   }
 
-  var color = const Color(0xFFFFFFFF);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,36 +32,6 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
       body: BlocBuilder(
         bloc: controller,
         builder: (BuildContext context, state) {
-          // if (state is CamInitialized) {
-          //   return Column(
-          //     children: [
-          //       ClipRRect(
-          //         borderRadius: BorderRadius.circular(10),
-          //         child: CameraPreview(
-          //           controller.camController,
-          //           child: crosshair(),
-          //         ),
-          //       ),
-          //       Expanded(
-          //         child: GestureDetector(
-          //           onTap: () async {
-          //             color = await controller.captureColor();
-          //             setState(() {});
-          //           },
-          //           child: Container(
-          //             decoration: BoxDecoration(
-          //               color: color,
-          //             ),
-          //           ),
-          //         ),
-          //       )
-          //     ],
-          //   );
-          // } else {
-          //   return Center(
-          //     child: Text(state is CamError ? 'Error!' : 'Initializing...'),
-          //   );
-          // }
           if (state is CamInitializing) {
             return Center(
               child: Column(
@@ -98,9 +65,8 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
                 if (state is CamInitialized)
                   Center(
                     child: ElevatedButton(
-                      onPressed: () async {
-                        color = await controller.captureColor();
-                        setState(() {});
+                      onPressed: () {
+                        controller.captureColor();
                       },
                       child: const Text('Capture'),
                     ),
@@ -126,7 +92,7 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
                   Expanded(
                     child: Container(
                       width: double.infinity,
-                      decoration: BoxDecoration(color: color),
+                      decoration: BoxDecoration(color: Color(state.color)),
                       child: Column(
                         children: [
                           Text.rich(
@@ -134,7 +100,7 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
                               children: [
                                 const TextSpan(text: 'This color is: '),
                                 TextSpan(
-                                  text: colorNames[color],
+                                  text: state.name,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -142,7 +108,7 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
                               ],
                             ),
                           ),
-                          Text('Color code: 0xFF${color.value.toRadixString(16).toUpperCase()}'),
+                          Text('Color code: 0x${state.color.toRadixString(16).toUpperCase()}'),
                           ElevatedButton(
                             onPressed: () {
                               controller.resumePreview();

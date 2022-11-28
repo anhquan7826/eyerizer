@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.state.dart';
 import 'package:eyerizer/helper/log_helper.dart';
+import 'package:eyerizer/model/color_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image/image.dart' as img;
@@ -30,18 +31,17 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
 
   late final CameraController camController;
 
-  Future<Color> captureColor() async {
+  Future<void> captureColor() async {
     emit(const CapturingColorStarted());
     final image = await camController.takePicture();
     final bytes = await image.readAsBytes();
     final decodedImage = img.decodeImage(bytes);
     if (decodedImage != null) {
       final color = _abgrToArgb(decodedImage.getPixelSafe((decodedImage.width / 2).round(), (decodedImage.height / 2).round()));
-      emit(CapturingColorFinished(color));
-      return Color(color);
+      final name = await ColorName().getName(Color(color));
+      emit(CapturingColorFinished(name, color));
     } else {
       emit(const CapturingColorError());
-      return const Color(0xFFFFFFFF);
     }
   }
 

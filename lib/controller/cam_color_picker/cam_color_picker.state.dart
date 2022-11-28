@@ -33,12 +33,13 @@ class CapturingColorStarted extends CameraColorPickerState {
 }
 
 class CapturingColorFinished extends CameraColorPickerState {
-  const CapturingColorFinished(this.color);
+  const CapturingColorFinished(this.name, this.color);
 
   final int color;
+  final String name;
 
   @override
-  List<Object?> get props => [color];
+  List<Object?> get props => [name, color];
 }
 
 class CapturingColorError extends CameraColorPickerState {
