@@ -1,9 +1,11 @@
 import 'package:camera/camera.dart';
+import 'package:eyerizer/components/color_name_card.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.controller.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 class CameraColorPickerScreen extends StatefulWidget {
   const CameraColorPickerScreen({Key? key}) : super(key: key);
@@ -90,33 +92,11 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
                   )
                 else if (state is CapturingColorFinished)
                   Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(color: Color(state.color)),
-                      child: Column(
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                const TextSpan(text: 'This color is: '),
-                                TextSpan(
-                                  text: state.name,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text('Color code: 0x${state.color.toRadixString(16).toUpperCase()}'),
-                          ElevatedButton(
-                            onPressed: () {
-                              controller.resumePreview();
-                            },
-                            child: const Text('Continue'),
-                          ),
-                        ],
-                      ),
+                    child: ColorNameCard(
+                      color: Color(state.color),
+                      name: state.name,
+                      width: 80.w,
+                      height: 40.h,
                     ),
                   )
               ],

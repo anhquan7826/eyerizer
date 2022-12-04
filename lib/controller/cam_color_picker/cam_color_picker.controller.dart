@@ -1,10 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.state.dart';
+import 'package:eyerizer/helper/abgr_to_argb.dart';
 import 'package:eyerizer/helper/log_helper.dart';
+import 'package:eyerizer/helper/offset_color.dart';
 import 'package:eyerizer/model/color_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image/image.dart' as img;
 
 class CameraColorPickerController extends Cubit<CameraColorPickerState> {
   CameraColorPickerController() : super(const CamInitializing()) {
@@ -35,20 +36,14 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
     emit(const CapturingColorStarted());
     final image = await camController.takePicture();
     final bytes = await image.readAsBytes();
-    final decodedImage = img.decodeImage(bytes);
-    if (decodedImage != null) {
-      final color = _abgrToArgb(decodedImage.getPixelSafe((decodedImage.width / 2).round(), (decodedImage.height / 2).round()));
-      final name = await ColorName().getName(Color(color));
+    final color = bytes.colorFromCenter();
+    if (color != 0) {
+      final rgbColor = abgrToArgb(color);
+      final name = await ColorName().getName(Color(rgbColor));
       emit(CapturingColorFinished(name, color));
     } else {
       emit(const CapturingColorError());
     }
-  }
-
-  int _abgrToArgb(int argbColor) {
-    final r = (argbColor >> 16) & 0xFF;
-    final b = argbColor & 0xFF;
-    return (argbColor & 0xFF00FF00) | (b << 16) | r;
   }
 
   Future<void> pausePreview() async {

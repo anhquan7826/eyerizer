@@ -18,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final appFunction = [
     ['Color Camera', 'Help you see identify colors in your surrounding environment.', '/cam_color_picker'],
     ['Colorblind Test', 'Help you identify which type of colorblindness you have.', '/color_blind_test'],
+    ['Colorblind Simulator', 'Know how people with colorblindness see.', '/colorblind_simulator'],
+    ['Color Picker', 'Get colors from your photos', '/color_picker'],
   ];
 
   @override
