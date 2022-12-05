@@ -32,7 +32,7 @@ class _ColorblindSimulatorState extends State<ColorblindSimulator> {
             backgroundColor: AppColors.mainBackground,
             body: Center(
               child: Hero(
-                tag: '/cam_color_picker',
+                tag: '/colorblind_simulator',
                 child: Icon(
                   Icons.visibility_outlined,
                   size: 48,
