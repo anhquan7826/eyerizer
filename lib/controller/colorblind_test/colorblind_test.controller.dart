@@ -6,9 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model/ishihara_test_model.dart';
 
 class ColorblindTestController extends Cubit<ColorblindTestState> {
-  ColorblindTestController() : super(const TestInitial());
+  ColorblindTestController() : super(const TestInitialState()) {
+    init();
+  }
 
-  final IshiharaTestModel testModel = IshiharaTestModel();
+  late final IshiharaTestModel testModel;
+
+  void init() {
+    emit(const TestInitiating());
+    testModel = IshiharaTestModel();
+    Future.delayed(const Duration(milliseconds: 1000), () => emit(const TestInitiated()));
+  }
 
   int _currentPalate = 0;
   Palate get currentPalate => testModel.palates[_currentPalate];

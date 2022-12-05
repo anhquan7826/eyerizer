@@ -7,26 +7,34 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 class ColorPickerController extends Cubit<ColorPickerState> {
-  ColorPickerController() : super(const ColorPickerInitialState());
+  ColorPickerController() : super(const ColorPickerInitialState()) {
+    init();
+  }
 
-  final ImagePicker picker = ImagePicker();
-
+  late final ImagePicker picker;
   img.Image? decodedImage;
 
-  GlobalKey imageKey = GlobalKey();
+  void init() {
+    emit(const ColorPickerInitiatingState());
+    picker = ImagePicker();
+    Future.delayed(const Duration(milliseconds: 1000), () => emit(const ColorPickerInitiatedState()));
+  }
 
   Future<void> pickImage() async {
+    emit(const ColorPickerImagePickingState());
     final imageBytes = await picker.pickImage(source: ImageSource.gallery).then((value) async => await value?.readAsBytes());
     if (imageBytes != null) {
       decodedImage = img.decodeImage(imageBytes);
+      emit(ColorPickerImagePickedState(imageBytes));
+    } else {
+      emit(const ColorPickerImagePickingFailedState());
     }
-    emit(ColorPickerPickImageState(imageBytes));
   }
 
-  Future<void> calculatePreviewBoxColor(Offset previewPosition) async {
+  Future<void> calculatePreviewBoxColor({required Offset previewPosition, required double renderWidth, required double renderHeight}) async {
     final offset = Offset(
-      (previewPosition.dx * imageWidth!) / renderWidth!,
-      (previewPosition.dy * imageHeight!) / renderHeight!,
+      (previewPosition.dx * imageWidth!) / renderWidth,
+      (previewPosition.dy * imageHeight!) / renderHeight,
     );
     final color = abgrToArgb(decodedImage!.getPixelSafe(offset.dx.floor(), offset.dy.floor()));
     final name = await ColorName().getName(Color(color));
@@ -36,8 +44,4 @@ class ColorPickerController extends Cubit<ColorPickerState> {
   int? get imageWidth => decodedImage?.width;
 
   int? get imageHeight => decodedImage?.height;
-
-  double? get renderWidth => imageKey.currentContext?.size?.width;
-
-  double? get renderHeight => imageKey.currentContext?.size?.height;
 }

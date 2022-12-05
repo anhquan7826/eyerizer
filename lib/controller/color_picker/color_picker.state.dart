@@ -13,13 +13,41 @@ class ColorPickerInitialState extends ColorPickerState {
   List<Object?> get props => [];
 }
 
-class ColorPickerPickImageState extends ColorPickerState {
-  const ColorPickerPickImageState(this.image);
+class ColorPickerInitiatingState extends ColorPickerState {
+  const ColorPickerInitiatingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ColorPickerInitiatedState extends ColorPickerState {
+  const ColorPickerInitiatedState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ColorPickerImagePickingState extends ColorPickerState {
+  const ColorPickerImagePickingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ColorPickerImagePickedState extends ColorPickerState {
+  const ColorPickerImagePickedState(this.image);
 
   final Uint8List? image;
 
   @override
   List<Object?> get props => [image];
+}
+
+class ColorPickerImagePickingFailedState extends ColorPickerState {
+  const ColorPickerImagePickingFailedState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class ColorPickerPickColorState extends ColorPickerState {
@@ -30,5 +58,4 @@ class ColorPickerPickColorState extends ColorPickerState {
 
   @override
   List<Object?> get props => [color];
-
 }

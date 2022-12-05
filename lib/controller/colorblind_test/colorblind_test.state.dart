@@ -4,8 +4,22 @@ abstract class ColorblindTestState extends Equatable {
   const ColorblindTestState();
 }
 
-class TestInitial extends ColorblindTestState {
-  const TestInitial();
+class TestInitialState extends ColorblindTestState {
+  const TestInitialState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class TestInitiating extends ColorblindTestState {
+  const TestInitiating();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class TestInitiated extends ColorblindTestState {
+  const TestInitiated();
 
   @override
   List<Object?> get props => [];

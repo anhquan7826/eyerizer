@@ -4,6 +4,13 @@ abstract class CameraColorPickerState extends Equatable {
   const CameraColorPickerState();
 }
 
+class CameraColorPickerInitialState extends CameraColorPickerState {
+  const CameraColorPickerInitialState();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class CamInitializing extends CameraColorPickerState {
   const CamInitializing();
 

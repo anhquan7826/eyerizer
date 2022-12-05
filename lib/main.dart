@@ -1,3 +1,4 @@
+import 'package:eyerizer/style/colors.dart';
 import 'package:eyerizer/view/cam_color_picker/cam_color_picker.view.dart';
 import 'package:eyerizer/view/color_picker/color_picker.view.dart';
 import 'package:eyerizer/view/colorblind_simulator/colorblind_simulator.view.dart';
@@ -10,16 +11,12 @@ import 'package:sizer/sizer.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.light,
-      systemNavigationBarDividerColor: Colors.transparent,
-    ),
-  );
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppColors.mainBackground,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: AppColors.mainBackground,
+    systemNavigationBarIconBrightness: Brightness.light,
+  ));
   runApp(const MyApp());
 }
 
@@ -30,9 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(),
+          ),
         ),
         routes: {
           '/': (context) => const HomeScreen(),

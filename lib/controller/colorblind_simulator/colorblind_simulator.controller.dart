@@ -19,8 +19,6 @@ class ColorblindSimulatorController extends Cubit<ColorblindSimulatorState> {
 
   FilterType filterType = FilterType.normal;
 
-  late CameraImage _streamedImage;
-
   Future<void> initCamera() async {
     emit(const ColorblindSimulatorCameraInitiatingState());
     try {
@@ -31,8 +29,7 @@ class ColorblindSimulatorController extends Cubit<ColorblindSimulatorState> {
       }
       cameraController = CameraController(cameras.first, ResolutionPreset.max, enableAudio: false);
       await cameraController.initialize();
-      cameraController.startImageStream((image) => _streamedImage = image);
-      emit(const ColorblindSimulatorCameraInitiatedState());
+      Future.delayed(const Duration(milliseconds: 1000), () => emit(const ColorblindSimulatorCameraInitiatedState()));
     } on CameraException catch (_) {
       emit(const ColorblindSimulatorCameraErrorState());
     }
@@ -40,14 +37,8 @@ class ColorblindSimulatorController extends Cubit<ColorblindSimulatorState> {
 
   @override
   Future<void> close() async {
-    cameraController
-      ..stopImageStream()
-      ..dispose();
+    cameraController.dispose();
     super.close();
-  }
-
-  Stream<CameraImage> image(FilterType mode) async* {
-    yield _streamedImage;
   }
 
   List<double> get filterMatrix {

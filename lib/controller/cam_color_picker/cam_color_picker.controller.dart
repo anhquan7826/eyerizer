@@ -8,16 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CameraColorPickerController extends Cubit<CameraColorPickerState> {
-  CameraColorPickerController() : super(const CamInitializing()) {
+  CameraColorPickerController() : super(const CameraColorPickerInitialState()) {
     initialize();
   }
 
   Future<void> initialize() async {
+    emit(const CamInitializing());
     try {
       final cameras = await availableCameras();
       camController = CameraController(cameras.first, ResolutionPreset.max, enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
       await camController.initialize();
-      emit(const CamInitialized());
+      Future.delayed(const Duration(milliseconds: 1000), () => emit(const CamInitialized()));
     } on CameraException catch (e) {
       LogHelper.log(e);
       emit(const CamError());
@@ -52,6 +53,10 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
 
   Future<void> resumePreview() async {
     // await camController.resumePreview();
+    emit(const CamInitialized());
+  }
+
+  void closeColorDialog() {
     emit(const CamInitialized());
   }
 }
