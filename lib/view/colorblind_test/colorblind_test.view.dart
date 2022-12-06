@@ -37,13 +37,9 @@ class _ColorblindTestScreenState extends State<ColorblindTestScreen> {
           return const Scaffold(
             backgroundColor: AppColors.mainBackground,
             body: Center(
-              child: Hero(
-                tag: '/color_blind_test',
-                child: Icon(
-                  Icons.quiz_outlined,
-                  size: 48,
-                  color: AppColors.mainText,
-                ),
+              child: CircularProgressIndicator(
+                backgroundColor: AppColors.mainBackground,
+                color: AppColors.mainText,
               ),
             ),
           );
@@ -51,12 +47,6 @@ class _ColorblindTestScreenState extends State<ColorblindTestScreen> {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: const Text(
-                'Ishihara Test',
-                style: TextStyle(
-                  color: AppColors.mainText,
-                ),
-              ),
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),

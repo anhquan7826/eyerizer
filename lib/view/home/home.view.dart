@@ -1,6 +1,5 @@
 import 'package:eyerizer/style/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,12 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    Permission.camera.request();
-    super.initState();
-  }
-
   final appFunction = [
     ['Color Camera', 'Help you see identify colors in your surrounding environment.', '/cam_color_picker', Icons.camera_alt_outlined],
     ['Colorblind Test', 'Help you identify which type of colorblindness you have.', '/color_blind_test', Icons.quiz_outlined],

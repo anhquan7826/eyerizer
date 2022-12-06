@@ -15,7 +15,7 @@ class ColorblindTestController extends Cubit<ColorblindTestState> {
   void init() {
     emit(const TestInitiating());
     testModel = IshiharaTestModel();
-    Future.delayed(const Duration(milliseconds: 1000), () => emit(const TestInitiated()));
+    emit(const TestInitiated());
   }
 
   int _currentPalate = 0;

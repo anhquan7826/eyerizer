@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-class ColorblindSimulator extends StatefulWidget {
-  const ColorblindSimulator({Key? key}) : super(key: key);
+class ColorblindSimulatorScreen extends StatefulWidget {
+  const ColorblindSimulatorScreen({Key? key}) : super(key: key);
 
   @override
-  State<ColorblindSimulator> createState() => _ColorblindSimulatorState();
+  State<ColorblindSimulatorScreen> createState() => _ColorblindSimulatorScreenState();
 }
 
-class _ColorblindSimulatorState extends State<ColorblindSimulator> {
+class _ColorblindSimulatorScreenState extends State<ColorblindSimulatorScreen> {
   final ColorblindSimulatorController controller = ColorblindSimulatorController();
 
   @override
@@ -31,13 +31,9 @@ class _ColorblindSimulatorState extends State<ColorblindSimulator> {
           return const Scaffold(
             backgroundColor: AppColors.mainBackground,
             body: Center(
-              child: Hero(
-                tag: '/colorblind_simulator',
-                child: Icon(
-                  Icons.visibility_outlined,
-                  size: 48,
-                  color: AppColors.mainText,
-                ),
+              child: CircularProgressIndicator(
+                backgroundColor: AppColors.mainBackground,
+                color: AppColors.mainText,
               ),
             ),
           );

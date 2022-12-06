@@ -33,13 +33,9 @@ class _CameraColorPickerScreenState extends State<CameraColorPickerScreen> {
           return const Scaffold(
             backgroundColor: AppColors.mainBackground,
             body: Center(
-              child: Hero(
-                tag: '/cam_color_picker',
-                child: Icon(
-                  Icons.camera_alt_outlined,
-                  size: 48,
-                  color: AppColors.mainText,
-                ),
+              child: CircularProgressIndicator(
+                backgroundColor: AppColors.mainBackground,
+                color: AppColors.mainText,
               ),
             ),
           );

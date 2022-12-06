@@ -29,7 +29,7 @@ class ColorblindSimulatorController extends Cubit<ColorblindSimulatorState> {
       }
       cameraController = CameraController(cameras.first, ResolutionPreset.max, enableAudio: false);
       await cameraController.initialize();
-      Future.delayed(const Duration(milliseconds: 1000), () => emit(const ColorblindSimulatorCameraInitiatedState()));
+      emit(const ColorblindSimulatorCameraInitiatedState());
     } on CameraException catch (_) {
       emit(const ColorblindSimulatorCameraErrorState());
     }

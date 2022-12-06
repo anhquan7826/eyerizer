@@ -17,7 +17,7 @@ class ColorPickerController extends Cubit<ColorPickerState> {
   void init() {
     emit(const ColorPickerInitiatingState());
     picker = ImagePicker();
-    Future.delayed(const Duration(milliseconds: 1000), () => emit(const ColorPickerInitiatedState()));
+    emit(const ColorPickerInitiatedState());
   }
 
   Future<void> pickImage() async {

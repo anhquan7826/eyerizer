@@ -18,7 +18,7 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
       final cameras = await availableCameras();
       camController = CameraController(cameras.first, ResolutionPreset.max, enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
       await camController.initialize();
-      Future.delayed(const Duration(milliseconds: 1000), () => emit(const CamInitialized()));
+      emit(const CamInitialized());
     } on CameraException catch (e) {
       LogHelper.log(e);
       emit(const CamError());

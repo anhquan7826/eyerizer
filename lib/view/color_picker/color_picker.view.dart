@@ -10,14 +10,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:measure_size/measure_size.dart';
 import 'package:sizer/sizer.dart';
 
-class ColorPicker extends StatefulWidget {
-  const ColorPicker({Key? key}) : super(key: key);
+class ColorPickerScreen extends StatefulWidget {
+  const ColorPickerScreen({Key? key}) : super(key: key);
 
   @override
-  State<ColorPicker> createState() => _ColorPickerState();
+  State<ColorPickerScreen> createState() => _ColorPickerScreenState();
 }
 
-class _ColorPickerState extends State<ColorPicker> {
+class _ColorPickerScreenState extends State<ColorPickerScreen> {
   final ColorPickerController controller = ColorPickerController();
 
   double renderWidth = 0;
@@ -83,18 +83,15 @@ class _ColorPickerState extends State<ColorPicker> {
           return const Scaffold(
             backgroundColor: AppColors.mainBackground,
             body: Center(
-              child: Hero(
-                tag: '/color_picker',
-                child: Icon(
-                  Icons.colorize_outlined,
-                  size: 48,
-                  color: AppColors.mainText,
-                ),
+              child: CircularProgressIndicator(
+                backgroundColor: AppColors.mainBackground,
+                color: AppColors.mainText,
               ),
             ),
           );
         }
-        return Scaffold(
+        else {
+          return Scaffold(
           appBar: AppBar(
             centerTitle: true,
             title: const Text('Color Picker'),
@@ -197,6 +194,7 @@ class _ColorPickerState extends State<ColorPicker> {
                   ),
           ),
         );
+        }
       },
     );
   }
