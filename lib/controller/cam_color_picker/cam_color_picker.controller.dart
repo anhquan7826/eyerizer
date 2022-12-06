@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:eyerizer/controller/cam_color_picker/cam_color_picker.state.dart';
-import 'package:eyerizer/helper/abgr_to_argb.dart';
 import 'package:eyerizer/helper/log_helper.dart';
 import 'package:eyerizer/helper/offset_color.dart';
 import 'package:eyerizer/model/color_name.dart';
@@ -39,8 +38,7 @@ class CameraColorPickerController extends Cubit<CameraColorPickerState> {
     final bytes = await image.readAsBytes();
     final color = bytes.colorFromCenter();
     if (color != 0) {
-      final rgbColor = abgrToArgb(color);
-      final name = await ColorName().getName(Color(rgbColor));
+      final name = await ColorName().getName(Color(color));
       emit(CapturingColorFinished(name, color));
     } else {
       emit(const CapturingColorError());

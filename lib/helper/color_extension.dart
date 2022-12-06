@@ -1,4 +1,4 @@
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 extension HSL on Color {
@@ -9,8 +9,8 @@ extension HSL on Color {
 
     double min = 0, max = 0, delta = 0;
 
-    min = Math.min<double>(r, Math.min(g, b));
-    max = Math.max<double>(r, Math.max(g, b));
+    min = math.min<double>(r, math.min(g, b));
+    max = math.max<double>(r, math.max(g, b));
     delta = max - min;
 
     double h = 0;
@@ -36,8 +36,8 @@ extension HSL on Color {
 
     double min = 0, max = 0, delta = 0;
 
-    min = Math.min<double>(r, Math.min(g, b));
-    max = Math.max<double>(r, Math.max(g, b));
+    min = math.min<double>(r, math.min(g, b));
+    max = math.max<double>(r, math.max(g, b));
     delta = max - min;
     final double l = (min + max) / 2;
 
@@ -55,8 +55,8 @@ extension HSL on Color {
 
     double min = 0, max = 0;
 
-    min = Math.min<double>(r, Math.min(g, b));
-    max = Math.max<double>(r, Math.max(g, b));
+    min = math.min<double>(r, math.min(g, b));
+    max = math.max<double>(r, math.max(g, b));
     final double l = (min + max) / 2;
 
     return (l * 255).round();
